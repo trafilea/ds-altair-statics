@@ -1,2 +1,2 @@
-alert("test")
+alert("test 2")
 
