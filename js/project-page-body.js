@@ -142,6 +142,7 @@ Webflow.push(function () {
         "gpt_response": gpt_response,
         "benchmark_id": benchmark_id,
         "angle": big_idea,
+        "request_id": localStorage.getItem('request_id'),
     }
 
     $.ajax({
@@ -228,6 +229,7 @@ $('body').on('click', '.draft-item', function () {
             .done((res) => {
                 console.log(res);
                 var request_id = res["request_id"];
+                localStorage.setItem('request_id', request_id);
                 pollRequestStatus(request_id);
                 
             })
