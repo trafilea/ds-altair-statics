@@ -149,6 +149,7 @@ Webflow.push(function () {
         "gpt_response": gpt_response,
         "benchmark_id": benchmark_id,
         "angle": big_idea,
+        "request_id": request_id,
     }
 
     $.ajax({
