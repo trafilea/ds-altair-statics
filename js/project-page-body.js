@@ -108,7 +108,7 @@ Webflow.push(function () {
                     console.log(res);
                     clearInterval(intervalId);
 
-                    $("#txtResults").html(res["chatgpt_response"].replaceAll("%%", "<br><br>"));
+                    $("#txtResults").html("<br><br><br><br><br>" + res.replaceAll("%%", "<br><br>"));
                     hideOverlay();
                     
                     let able_to_regenerate = true;
@@ -149,7 +149,6 @@ Webflow.push(function () {
         "gpt_response": gpt_response,
         "benchmark_id": benchmark_id,
         "angle": big_idea,
-        "request_id": request_id,
     }
 
     $.ajax({

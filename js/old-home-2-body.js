@@ -1,4 +1,3 @@
-
 var Webflow = Webflow || [];
 Webflow.push(function () {
 
@@ -31,7 +30,7 @@ function getBrands() {
         getCountries(brands[i]["brand_id"]);
         }
     }
-    
+
     })
     .fail((res) => {
     alert(res);
@@ -117,7 +116,7 @@ function getCountries(brand_id) {
         beforeSend: function () {
         //$('#btnSubmit').val('Please wait...');
     }
-})
+    })
 
     .done((res) => {
     $('#selCountry')

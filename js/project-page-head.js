@@ -1,37 +1,37 @@
 function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {
     if (able_to_regenerate) {
-        $('#btnGenerate').text("Regenerate");
+    $('#btnGenerate').text("Regenerate");
     $('#btnGenerate').removeClass("hide");
-    }
-    else {
-        $('#btnGenerate').addClass("hide");
-    }
-    
-    if (able_to_generate) {
-        $('#btnGenerate').text("Generate");
-        $('#btnGenerate').removeClass("hide");
-    }
-    
-    if (able_to_save_draft) {
-        $('#btnSaveDraft').removeClass("hide");
-    }
-    else {
-        $('#btnSaveDraft').addClass("hide");
-    }
+}
+else {
+    $('#btnGenerate').addClass("hide");
+}
+
+if (able_to_generate) {
+    $('#btnGenerate').text("Generate");
+    $('#btnGenerate').removeClass("hide");
+}
+
+if (able_to_save_draft) {
+    $('#btnSaveDraft').removeClass("hide");
+}
+else {
+    $('#btnSaveDraft').addClass("hide");
+}
 }
 
 // add drafts to draftContainer with this html
 html_draft = '<label class="w-radio"><input type="radio" data-name="Radio" id="draft_##draft_id##" name="radio" value="Radio" class="w-form-formradioinput w-radio-input draft-item" data-draft="##draft_id##"><span class="radio-text w-form-label" for="radio">Draft ##draft_id##</span></label>'
 
-// add benchmarks to benchmarkContainer with this html
-html_benchmark = '<div id="benchmark_##angle_id##_##benchmark_id##" class="accordian-toggle w-dropdown-toggle" id="w-dropdown-toggle-1" aria-controls="w-dropdown-list-1" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0"> <div class="accordian-title-wrapper"> <div class="accordian-title">##benchmark_name##</div> <div class="accordian-icon w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.9998 15L7.75684 10.757L9.17184 9.34302L11.9998 12.172L14.8278 9.34302L16.2428 10.757L11.9998 15Z" fill="currentColor"></path> </svg></div> </div> </div> <nav class="accordian-dropdown w-dropdown-list" style="height: 0px;" id="w-dropdown-list-1" aria-labelledby="w-dropdown-toggle-1"> <div class="accordian-content" style="transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"> <div class="w-form" id="draftContainer_##angle_id##_##benchmark_id##"> </div> </div> </nav>'
+    // add benchmarks to benchmarkContainer with this html
+    html_benchmark = '<div id="benchmark_##angle_id##_##benchmark_id##" class="accordian-toggle w-dropdown-toggle" id="w-dropdown-toggle-1" aria-controls="w-dropdown-list-1" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0"> <div class="accordian-title-wrapper"> <div class="accordian-title">##benchmark_name##</div> <div class="accordian-icon w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.9998 15L7.75684 10.757L9.17184 9.34302L11.9998 12.172L14.8278 9.34302L16.2428 10.757L11.9998 15Z" fill="currentColor"></path> </svg></div> </div> </div> <nav class="accordian-dropdown w-dropdown-list" style="height: 0px;" id="w-dropdown-list-1" aria-labelledby="w-dropdown-toggle-1"> <div class="accordian-content" style="transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"> <div class="w-form" id="draftContainer_##angle_id##_##benchmark_id##"> </div> </div> </nav>'
 
-// add angles to angleContainer with this html
-html_angle = '<div id="angle_##angle_id##" data-hover="false" data-delay="0" class="dropdown-4 w-dropdown" style="max-width: 940px; display: block"> <div class="dropdown-toggle-3 w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0"> <div class="container-file"><img src="https://assets-global.website-files.com/651484c1d8627ae551b49727/653ad0a5e50fb15f43827452_file-05.svg" loading="lazy" alt="" class="image-3"></div> <div class="container-text--drop"> <div class="icon-dropdown w-icon-dropdown-toggle" aria-hidden="true"></div> <div class="text-block-dropdown" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">##angle_name##</div> </div> </div> <nav class="dropdown-list-3 w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0"> <div class="accordian-wrapper"> <div id="benchmarkContainer_##angle_id##_##benchmark_id##" data-delay="0" data-hover="false" class="accordian-item w-dropdown" style="max-width: 940px;"> </div> </div> </nav> </div>'
-
-var angle_changed = false;
-
-function showOverlay() {
+    // add angles to angleContainer with this html
+    html_angle = '<div id="angle_##angle_id##" data-hover="false" data-delay="0" class="dropdown-4 w-dropdown" style="max-width: 940px; display: block"> <div class="dropdown-toggle-3 w-dropdown-toggle" id="w-dropdown-toggle-0" aria-controls="w-dropdown-list-0" aria-haspopup="menu" aria-expanded="false" role="button" tabindex="0"> <div class="container-file"><img src="https://assets-global.website-files.com/651484c1d8627ae551b49727/653ad0a5e50fb15f43827452_file-05.svg" loading="lazy" alt="" class="image-3"></div> <div class="container-text--drop"> <div class="icon-dropdown w-icon-dropdown-toggle" aria-hidden="true"></div> <div class="text-block-dropdown" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">##angle_name##</div> </div> </div> <nav class="dropdown-list-3 w-dropdown-list" id="w-dropdown-list-0" aria-labelledby="w-dropdown-toggle-0"> <div class="accordian-wrapper"> <div id="benchmarkContainer_##angle_id##_##benchmark_id##" data-delay="0" data-hover="false" class="accordian-item w-dropdown" style="max-width: 940px;"> </div> </div> </nav> </div>'
+    
+    var angle_changed = false;
+    
+    function showOverlay() {
     $("#overlay").show();
 }
 
@@ -94,23 +94,25 @@ function getBenchmarks(ad_id) {
                                 benchmark_text += benchmark_obj[key];
                             }
                         }
-                        $("#txtBenchmarkComparison").html((benchmark_text).replaceAll("%%", "<br><br>"));
+                        let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
+                        $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                         // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
                     });
                 }
             }
 
             benchmark_selector.addEventListener('change', function() {
-            const selectedBenchmarkId = this.value;
-            getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
-                benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
-                var benchmark_text = ""
-                for (let key in benchmark_obj) {
-                    if (benchmark_obj.hasOwnProperty(key)) { 
-                        benchmark_text += benchmark_obj[key];
+                const selectedBenchmarkId = this.value;
+                getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
+                    benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
+                    var benchmark_text = ""
+                    for (let key in benchmark_obj) {
+                        if (benchmark_obj.hasOwnProperty(key)) { 
+                            benchmark_text += benchmark_obj[key];
+                        }
                     }
-                }
-                $("#txtBenchmarkComparison").html((benchmark_text).replaceAll("%%", "<br><br>"));
+                    let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
+                    $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                 });
             });
 
@@ -132,8 +134,7 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
         $('#angleContainer').append(html_angle_new);
     }
 
-    // check if a div called benchmark_(new_angle_id)_(new_bechmark_id) already exists, if it doesn't append it to the div with id benchmarkContainer_##angle_id##_##benchmark_id##
-    // if it does, don't do anything.
+
     if ($('#benchmark_' + new_angle_id + '_' + new_benchmark_id).length == 0) {
         // append the new benchmark
         var html_benchmark_new = html_benchmark.replaceAll("##angle_id##", new_angle_id);
@@ -142,8 +143,7 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
         $('#benchmarkContainer_' + new_angle_id + '_' + new_benchmark_id).append(html_benchmark_new);
     }
 
-    // check if a div called draft_(new_angle_id)_(new_bechmark_id) already exists, if it doesn't append it to the div with id draftContainer_##angle_id##_##benchmark_id##
-    // if it does, don't do anything.
+
     if ($('#draft_' + new_draft_id).length == 0) {
         // append the new draft
         var html_draft_new = html_draft.replaceAll("##angle_id##", new_angle_id);
