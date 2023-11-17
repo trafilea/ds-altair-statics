@@ -1,10 +1,3 @@
-
-<div id="overlay" style="display: none;">
-    <div class="overlay-content">
-        <p>Working...</p>
-    </div>
-</div>
-
 var Webflow = Webflow || [];
 Webflow.push(function () {
 		
@@ -27,7 +20,7 @@ Webflow.push(function () {
     var angle_id = url.searchParams.get("angle_id");
 
     const formMethod = "POST";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_project";
+    const formAction = BASE_ENDPOINT + "/get_project";
     endpoint = formAction
     $.ajax({
         method: formMethod,
@@ -64,7 +57,7 @@ Webflow.push(function () {
 
         $.ajax({
             method: "POST",
-            url: "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_drafts",
+            url: BASE_ENDPOINT + "/get_drafts",
             data: JSON.stringify(my_data),
             beforeSend: function() {//$('#btnSubmit').val('Please wait...');
             }
@@ -89,13 +82,13 @@ Webflow.push(function () {
 
     // pollRequestStatus will poll the status of the request every 5 seconds, if the response is a failure it'll try again. otherwise it'll break
     function pollRequestStatus(request_id) {
-        // poll the status of the request every 5 seconds, the endpoint is https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_results
+        // poll the status of the request every 5 seconds, the endpoint is BASE_ENDPOINT/get_results
         // if the response is a failure it'll try again. otherwise it'll break
         // only do the request every 5 seconds
         intervalId = setInterval(function () {
             $.ajax({
                 method: "POST",
-                url: "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_results",
+                url: BASE_ENDPOINT + "/get_results",
                 data: JSON.stringify(
                     {
                         request_id: request_id
@@ -153,7 +146,7 @@ Webflow.push(function () {
 
     $.ajax({
         method: "POST",
-        url: "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/save_draft",
+        url: BASE_ENDPOINT + "/save_draft",
         data: JSON.stringify(my_data),
         beforeSend: function() {//$('#btnSubmit').val('Please wait...');
         }
@@ -182,7 +175,7 @@ $('body').on('click', '.draft-item', function () {
         var draft_id = $(this).data('draft');
 
         const formMethod = "POST";
-        const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_draft";
+        const formAction = BASE_ENDPOINT + "/get_draft";
 
         $.ajax({
             method: formMethod,
@@ -218,7 +211,7 @@ $('body').on('click', '.draft-item', function () {
         var angle = $("#txtBigIdea").val();
 
         const formMethod = "POST";
-        const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/ask";
+        const formAction = BASE_ENDPOINT + "/ask";
 
         $.ajax({
             method: formMethod,

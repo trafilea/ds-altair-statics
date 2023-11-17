@@ -40,7 +40,7 @@ function hideOverlay() {
 }
 function getBenchmark(benchmark_id) {
     const formMethod = "POST";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_benchmark";
+    const formAction = BASE_ENDPOINT + "/get_benchmark";
     let my_data = {
             "benchmark_id": benchmark_id
         }
@@ -64,7 +64,7 @@ function getBenchmark(benchmark_id) {
 
 function getBenchmarks(ad_id) {
     const formMethod = "GET";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_benchmarks?ad_id=" + ad_id;
+    const formAction = BASE_ENDPOINT + "/get_benchmarks?ad_id=" + ad_id;
 
     endpoint = formAction
     $.ajax({
