@@ -3,7 +3,7 @@ Webflow.push(function () {
 
 function getBrands() {
     const formMethod = "GET";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_brands";
+    const formAction = BASE_ENDPOINT + "/get_brands";
 
     endpoint = formAction
     $.ajax({
@@ -40,7 +40,7 @@ function getBrands() {
 function getProducts(brand_id) {
 
     const formMethod = "GET";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_products?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/get_products?brand_id=" + brand_id;
 
     endpoint = formAction
     $.ajax({
@@ -73,7 +73,7 @@ function getProducts(brand_id) {
 
 function getAudiences(brand_id) {
     const formMethod = "GET";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_audiences?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/get_audiences?brand_id=" + brand_id;
 
     endpoint = formAction
     $.ajax({
@@ -107,7 +107,7 @@ function getAudiences(brand_id) {
 
 function getCountries(brand_id) {
     const formMethod = "GET";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_countries?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/get_countries?brand_id=" + brand_id;
 
     endpoint = formAction
     $.ajax({
@@ -153,7 +153,7 @@ $('#btnCreateProject').click(function (e) {
     e.preventDefault();
 
     const formMethod = "POST";
-    const formAction = "https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/create_project";
+    const formAction = BASE_ENDPOINT + "/create_project";
 
     var product_selector = document.getElementById("selProduct");
     var audience_selector = document.getElementById("selAudience");
@@ -222,7 +222,7 @@ $('#btnCreateProject').click(function (e) {
 
 });
 
-// call a function that retrieves data from the https://1pn3syo5k0.execute-api.us-east-1.amazonaws.com/get_brands endpoint
+// call a function that retrieves data from the BASE_ENDPOINT/get_brands endpoint
 // and populates the brand selector
 getBrands();
 });
