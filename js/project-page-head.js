@@ -82,6 +82,7 @@ function getBenchmarks(ad_id) {
                 var opt = document.createElement('option');
                 opt.value = benchmarks[i]["benchmark_id"];
                 opt.innerHTML = benchmarks[i]["benchmark_description"];
+                opt.title = benchmarks[i]["benchmark_long_description"];
                 benchmark_selector.appendChild(opt);
 
                 // if it's the first one, populate the benchmark content
