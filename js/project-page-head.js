@@ -88,7 +88,7 @@ function getBenchmarks(ad_id) {
                 // if it's the first one, populate the benchmark content
                 if (i == 0) {
                     getBenchmark(benchmarks[i]["benchmark_id"]).then((benchmark_obj) => {
-                        var link = benchmark_obj["link"] 
+                        var link = benchmark_obj["benchmark"]["link"];
                         benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
                         
                         var benchmark_text = ""
