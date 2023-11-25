@@ -88,14 +88,16 @@ function getBenchmarks(ad_id) {
                 // if it's the first one, populate the benchmark content
                 if (i == 0) {
                     getBenchmark(benchmarks[i]["benchmark_id"]).then((benchmark_obj) => {
+                        var link = benchmark_obj["link"] 
                         benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
+                        
                         var benchmark_text = ""
                         for (let key in benchmark_obj) {
                             if (benchmark_obj.hasOwnProperty(key)) {
                                 benchmark_text += benchmark_obj[key];
                             }
                         }
-                        let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
+                        let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
                         $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                         // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
                     });
