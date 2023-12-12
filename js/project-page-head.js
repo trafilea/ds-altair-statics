@@ -39,22 +39,15 @@ function hideOverlay() {
     $("#overlay").hide();
 }
 function getBenchmark(benchmark_id) {
-    const formMethod = "POST";
-    const formAction = BASE_ENDPOINT + "/get_benchmark";
-    let my_data = {
-        "benchmark_id": benchmark_id
-    }
-
+    const formMethod = "GET";
+    const formAction = BASE_ENDPOINT + "/benchmarks/" + benchmark_id;
 
     endpoint = formAction
     return $.ajax({
         method: formMethod,
         url: endpoint,
-        data: JSON.stringify(my_data),
-        beforeSend: function () {//$('#btnSubmit').val('Please wait...');
-        }
     }).done((res) => {
-        return res["benchmark"];
+        return res;
     }
     ).fail((res) => {
         alert(res);
@@ -64,7 +57,7 @@ function getBenchmark(benchmark_id) {
 
 function getBenchmarks(ad_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_benchmarks?ad_id=" + ad_id;
+    const formAction = BASE_ENDPOINT + "/ads/" + ad_id + "/benchmarks";
 
     endpoint = formAction
     $.ajax({
@@ -80,16 +73,16 @@ function getBenchmarks(ad_id) {
             var benchmarks = res["benchmarks"];
             for (var i = 0; i < benchmarks.length; i++) {
                 var opt = document.createElement('option');
-                opt.value = benchmarks[i]["benchmark_id"];
-                opt.innerHTML = benchmarks[i]["benchmark_description"];
-                opt.title = benchmarks[i]["benchmark_long_description"];
+                opt.value = benchmarks[i]["id"];
+                opt.innerHTML = benchmarks[i]["name"];
+                opt.title = benchmarks[i]["description"];
                 benchmark_selector.appendChild(opt);
 
                 // if it's the first one, populate the benchmark content
                 if (i == 0) {
-                    getBenchmark(benchmarks[i]["benchmark_id"]).then((benchmark_obj) => {
+                    getBenchmark(benchmarks[i]["id"]).then((benchmark_obj) => {
                         var link = benchmark_obj["benchmark"]["link"];
-                        benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
+                        benchmark_obj = benchmark_obj["benchmark"]["benchmark_data"];
                         
                         var benchmark_text = ""
                         for (let key in benchmark_obj) {
