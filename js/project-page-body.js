@@ -25,6 +25,8 @@ Webflow.push(function () {
     $.ajax({
         method: formMethod,
         url: endpoint,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         data: JSON.stringify({
             project_id: project_id,
             angle_id: angle_id
@@ -144,6 +146,8 @@ Webflow.push(function () {
     $.ajax({
         method: "POST",
         url: BASE_ENDPOINT + "/save_draft",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         data: JSON.stringify(my_data),
         beforeSend: function() {//$('#btnSubmit').val('Please wait...');
         }
@@ -210,6 +214,8 @@ $('body').on('click', '.draft-item', function () {
         $.ajax({
             method: formMethod,
             url: formAction,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             data: JSON.stringify({
                 project_id: project_id,
                 benchmark_id: benchmark,
