@@ -73,7 +73,7 @@ function getProducts(brand_id) {
 
 function getAudiences(brand_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/brand/" + brand_id + "/audiences";
+    const formAction = BASE_ENDPOINT + "/brands/" + brand_id + "/audiences";
 
     endpoint = formAction
     $.ajax({
@@ -107,7 +107,7 @@ function getAudiences(brand_id) {
 
 function getCountries(brand_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/brand/" + brand_id + "/countries";
+    const formAction = BASE_ENDPOINT + "/brands/" + brand_id + "/countries";
 
     endpoint = formAction
     $.ajax({
