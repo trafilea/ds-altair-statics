@@ -192,12 +192,12 @@ $('#btnCreateProject').click(function (e) {
         data: JSON.stringify(
         {
             name: project_name,
-            audience_id: audience_id,
-            product_id: product_id,
+            audience_id: parseInt(audience_id),
+            product_id: parseInt(product_id),
             angle: angle,
-            ad_id: ad_id,
-            user_id: 0,
-            country_id: country_id,
+            ad_id: parseInt(ad_id),
+            user_id: 1,
+            country_id: parseInt(country_id),
         }),
         beforeSend: function () {
         //$('#btnSubmit').val('Please wait...');
