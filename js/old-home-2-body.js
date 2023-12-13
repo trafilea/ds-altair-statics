@@ -189,6 +189,8 @@ $('#btnCreateProject').click(function (e) {
     $.ajax({
         method: formMethod,
         url: endpoint,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         data: JSON.stringify(
         {
             name: project_name,
