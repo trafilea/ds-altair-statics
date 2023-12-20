@@ -19,24 +19,19 @@ Webflow.push(function () {
     var project_id = url.searchParams.get("project_id");
     var angle_id = url.searchParams.get("angle_id");
 
-    const formMethod = "POST";
-    const formAction = BASE_ENDPOINT + "/get_project";
+    const formMethod = "GET";
+    const formAction = BASE_ENDPOINT + "/projects/" + project_id + "/angles/" + angle_id;
     endpoint = formAction
     $.ajax({
         method: formMethod,
         url: endpoint,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({
-            project_id: project_id,
-            angle_id: angle_id
-        }),
         beforeSend: function () {
             $('#btnGenerate').val('Please wait...');
         }
     })
     .done((res) => {
-        res = res["response"][0]
         console.log(res);
         var product = res["product_name"];
         var project_name = res["project_name"];
