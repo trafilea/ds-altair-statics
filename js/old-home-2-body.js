@@ -212,7 +212,7 @@ $('#btnCreateProject').click(function (e) {
         ad_id = res["ad_id"]
 
         // redirect to https://altair-trafilea.webflow.io/project-page with the project id
-        window.location.href = "https://api-integration-test-e340db.webflow.io/members/project-page?project_id=" + project_id + "&angle_id=" + angle_id + "&ad_id=" + ad_id;
+        window.location.href = CURRENT_DOMAIN + "/members/project-page?project_id=" + project_id + "&angle_id=" + angle_id + "&ad_id=" + ad_id;
 
     })
     .fail((res) => {
