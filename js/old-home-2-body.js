@@ -172,17 +172,17 @@ $('#btnCreateProject').click(function (e) {
     var landing = document.getElementById("radLanding");
     var ad_id = 0;
     if (landing.checked == true) {
-        ad_id = 1;
+        ad_id = 3;
     }
 
     var lead_ad = document.getElementById("radLeadAd");
     if (lead_ad.checked == true) {
-        ad_id = 2;
+        ad_id = 1;
     }
 
     var short_ad = document.getElementById("radShortAd");
     if (short_ad.checked == true) {
-        ad_id = 3;
+        ad_id = 2;
     }
 
     endpoint = formAction
