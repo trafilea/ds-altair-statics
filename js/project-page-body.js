@@ -212,8 +212,8 @@ $('body').on('click', '.draft-item', function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({
-                project_id: project_id,
-                benchmark_id: benchmark,
+                project_id: parseInt(project_id),
+                benchmark_id: parseInt(benchmark),
                 angle: angle
             }),
             beforeSend: function () {
