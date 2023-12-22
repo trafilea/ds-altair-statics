@@ -81,8 +81,8 @@ function getBenchmarks(ad_id) {
                 // if it's the first one, populate the benchmark content
                 if (i == 0) {
                     getBenchmark(benchmarks[i]["id"]).then((benchmark_obj) => {
-                        var link = benchmark_obj["benchmark"]["link"];
-                        benchmark_obj = benchmark_obj["benchmark"]["benchmark_data"];
+                        var link = benchmark_obj["link"];
+                        benchmark_obj = benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"];
                         
                         var benchmark_text = ""
                         for (let key in benchmark_obj) {
@@ -100,7 +100,7 @@ function getBenchmarks(ad_id) {
             benchmark_selector.addEventListener('change', function () {
                 const selectedBenchmarkId = this.value;
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
-                    benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
+                    benchmark_obj = benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"];
                     var benchmark_text = ""
                     for (let key in benchmark_obj) {
                         if (benchmark_obj.hasOwnProperty(key)) {
