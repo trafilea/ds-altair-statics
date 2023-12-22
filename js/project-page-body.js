@@ -38,7 +38,7 @@ Webflow.push(function () {
         var audience = res["audience_description"];
         var brand = res["brand_name"];
         var country = res["country_name"];
-        var big_idea = res["angle_insight"];
+        var big_idea = res["insight"];
 
 
         document.getElementById("txtProjectName").innerHTML = project_name;
