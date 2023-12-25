@@ -114,58 +114,58 @@ Webflow.push(function () {
     });
     
     $("#btnSaveDraft").click(function(){
-    var gpt_response = $('#txtResults').html();
-    var benchmark_id = $('#selBenchmark').val();
-
-    // get project_id and angle_id from url parameters
-    var urlParams = new URLSearchParams(window.location.search);
-    var project_id = urlParams.get('project_id');
-		var angle_id = null;
-    if (angle_changed == false) {
-        angle_id = urlParams.get('angle_id');
-    }
+        var gpt_response = $('#txtResults').html();
+        var benchmark_id = $('#selBenchmark').val();
     
-    var big_idea = null;
-    if (angle_changed == true) {
-        big_idea = $('#txtBigIdea').val()
-    }
-
-    my_data = {
-        "project_id": project_id,
-        "angle_id": angle_id,
-        "gpt_response": gpt_response,
-        "benchmark_id": benchmark_id,
-        "angle": big_idea,
-        "request_id": localStorage.getItem('request_id'),
-    }
-
-    $.ajax({
-        method: "POST",
-        url: BASE_ENDPOINT + "/save_draft",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify(my_data),
-        beforeSend: function() {//$('#btnSubmit').val('Please wait...');
+        // get project_id and angle_id from url parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var project_id = urlParams.get('project_id');
+            var angle_id = null;
+        if (angle_changed == false) {
+            angle_id = urlParams.get('angle_id');
         }
-    }).done((res)=>{
-        debugger;
-
-        var new_angle_id = res['angle_id'];
-        var new_benchmark_id = res['benchmark_id'];
-        var new_benchmark_name = res['benchmark_name'];
-        var new_draft_id = res['draft_id'];
-        var new_angle_name = res['angle_name'].replaceAll("\"", "").replaceAll("\\", "");
         
-        addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_name, new_draft_id);
-        
-        let able_to_regenerate = true;
-        let able_to_generate = false;
-        let able_to_save_draft = false;
-        calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
-    }
-    ).fail((res)=>{
-        console.log(res);
-    })
+        var big_idea = null;
+        if (angle_changed == true) {
+            big_idea = $('#txtBigIdea').val()
+        }
+    
+        my_data = {
+            "project_id": parseInt(project_id),
+            "angle_id": parseInt(angle_id),
+            "gpt_response": gpt_response,
+            "benchmark_id": parseInt(benchmark_id),
+            "angle": big_idea,
+            "request_id": localStorage.getItem('request_id'),
+        }
+    
+        $.ajax({
+            method: "POST",
+            url: BASE_ENDPOINT + "/drafts",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(my_data),
+            beforeSend: function() {//$('#btnSubmit').val('Please wait...');
+            }
+        }).done((res)=>{
+            debugger;
+    
+            var new_angle_id = res['angle_id'];
+            var new_benchmark_id = res['benchmark_id'];
+            var new_benchmark_name = res['benchmark_name'];
+            var new_draft_id = res['draft_id'];
+            var new_angle_name = res['angle_name'].replaceAll("\"", "").replaceAll("\\", "");
+            
+            addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_name, new_draft_id);
+            
+            let able_to_regenerate = true;
+            let able_to_generate = false;
+            let able_to_save_draft = false;
+            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
+        }
+        ).fail((res)=>{
+            console.log(res);
+        })
 });
 
 $('body').on('click', '.draft-item', function () {
