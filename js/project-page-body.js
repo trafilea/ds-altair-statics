@@ -67,7 +67,7 @@ Webflow.push(function () {
                         new_benchmark_name = benchmark["benchmark_name"];
                         new_draft_id = draft["draft_id"];
 
-                        addDraft(draft["angle_id"], draft["angle_name"], draft["benchmark_id"], draft["benchmark_name"], draft["draft_id"]);
+                        addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_name, new_draft_id);
                     }
                 }
             }
