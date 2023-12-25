@@ -172,7 +172,7 @@ $('body').on('click', '.draft-item', function () {
         var draft_id = $(this).data('draft');
 
         const formMethod = "GET";
-        const formAction = BASE_ENDPOINT + "/dafts/" + draft_id;
+        const formAction = BASE_ENDPOINT + "/drafts/" + draft_id;
 
         $.ajax({
             method: formMethod,
