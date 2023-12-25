@@ -92,6 +92,7 @@ Webflow.push(function () {
             })
                 .done((res) => {
                     console.log(res);
+                    res = res["text"]
                     clearInterval(intervalId);
 
                     $("#txtResults").html("<br><br><br><br><br>" + res.replaceAll("%%", "<br><br>"));
