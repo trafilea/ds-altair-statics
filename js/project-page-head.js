@@ -1,3 +1,315 @@
+function generateStoryboard(gpt_results) {
+    gpt_results = {
+        "columns": [
+            {
+                "name": "attention",
+                "spans": 1
+            },
+            {
+                "name": "interest",
+                "spans": 3
+            },
+            {
+                "name": "block_1",
+                "spans": 1
+            },
+            {
+                "name": "block_2",
+                "spans": 3
+            },
+            {
+                "name": "block_3",
+                "spans": 2
+            },
+            {
+                "name": "block_1",
+                "spans": 1
+            }
+        ],
+        "sub_columns": [
+            {
+                "name": "attention"
+            },
+            {
+                "name": "product_demo"
+            },
+            {
+                "name": "product_result"
+            },
+            {
+                "name": "price"
+            },
+            {
+                "name": "content_block_1"
+            },
+            {
+                "name": "content_block_1"
+            },
+            {
+                "name": "content_block_2"
+            },
+            {
+                "name": "content_block_3"
+            },
+            {
+                "name": "content_block_1"
+            },
+            {
+                "name": "content_block_2"
+            },
+            {
+                "name": "content_block_1"
+            }
+        ],
+        "reference": [
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            },
+            {
+                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
+            }
+        ],
+        "visual": [
+            {
+                "content": "A woman showing her body shape, specially her butt"
+            },
+            {
+                "content": "A woman showing her butt with pain points: bulges and cellulitis"
+            },
+            {
+                "content": "The same woman as before showing her butt with no signs of cellulitis and bulges"
+            },
+            {
+                "content": "Same woman showing her butt from other positions"
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            }
+        ],
+        "audio": [
+            {
+                "content": "My husband went, did you get a butt lift?"
+            },
+            {
+                "content": "Let me show you how I turn my booty from this"
+            },
+            {
+                "content": "To this"
+            },
+            {
+                "content": "For less than than 50 bucks"
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            }
+        ],
+        "copy": [
+            {
+                "content": "Butt lift?"
+            },
+            {
+                "content": "This"
+            },
+            {
+                "content": "To this"
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            }
+        ],
+        "comments": [
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            },
+            {
+                "content": ""
+            }
+        ]
+    }
+
+    storyboard_html = '<div class="container-3"><div class="section-3 chart"><div class="price-table"><div class="price-table_options"> <div id="price-card-slider" class="swiper cc-price-table"> <div class="swiper-wrapper cc-price-table prueba"> <div class="swiper-slide cc-price-table"> <div name="block" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##columns## </div> <div name="subblock" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##subcolumns## </div> <div class="price-table_row"> <div class="price-table_cell cc-title reference"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Reference</span></div> </div> ##reference## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda1b_Group-1.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Visual</span></div> </div> ##visual## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda19_Group%20856.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Audio</span></div> </div> ##audio## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Copy</span></div> </div> ##copy## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda17_Vector.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Comments</span></div> </div> ##comments## </div> </div> </div> </div> </div></div></div></div>'
+    column_html = '<div class="price-table_cell cc-callout cc-header subhero" style="width: ##width##;"><div class="u-text-semibold subhero">##content##</div></div>'
+    subcolumn_html = '<div class="price-table_cell cc-header"><div class="u-text-semibold">##content##</div></div>'
+    reference_html = '<div class="price-table_cell cc-callout"><img src="##src_img##" alt=""></div>'
+    visual_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    audio_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    copy_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    comments_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+
+    all_columns_html = ''
+    all_subcolumns_html = ''
+    all_reference_html = ''
+    all_visual_html = ''
+    all_audio_html = ''
+    all_copy_html = ''
+    all_comments_html = ''
+
+    for (var i = 0; i < gpt_results["columns"].length; i++) {
+        var column = gpt_results["columns"][i];
+        var column_name = column["name"];
+        var column_spans = column["spans"];
+
+        var column_html_new = column_html.replaceAll("##content##", column_name);
+        column_html_new = column_html_new.replaceAll("##width##", (248 * column_spans + 10 * (column_spans - 1)) + "px");
+        all_columns_html += column_html_new;
+    }
+
+    for (var i = 0; i < gpt_results["sub_columns"].length; i++) {
+        var subcolumn = gpt_results["sub_columns"][i];
+        var subcolumn_name = subcolumn["name"];
+
+        var subcolumn_html_new = subcolumn_html.replaceAll("##content##", subcolumn_name);
+        all_subcolumns_html += subcolumn_html_new;
+
+        var reference = gpt_results["reference"][i];
+        var reference_content = reference["content"];
+        var reference_html_new = reference_html.replaceAll("##content##", reference_content);
+        reference_html_new = reference_html_new.replaceAll("##src_img##", reference_content);
+        all_reference_html += reference_html_new;
+
+        var visual = gpt_results["visual"][i];
+        var visual_content = visual["content"];
+        var visual_html_new = visual_html.replaceAll("##content##", visual_content);
+        all_visual_html += visual_html_new;
+
+        var audio = gpt_results["audio"][i];
+        var audio_content = audio["content"];
+        var audio_html_new = audio_html.replaceAll("##content##", audio_content);
+        all_audio_html += audio_html_new;
+
+        var copy = gpt_results["copy"][i];
+        var copy_content = copy["content"];
+        var copy_html_new = copy_html.replaceAll("##content##", copy_content);
+        all_copy_html += copy_html_new;
+
+        var comments = gpt_results["comments"][i];
+        var comments_content = comments["content"];
+        var comments_html_new = comments_html.replaceAll("##content##", comments_content);
+        all_comments_html += comments_html_new;
+    }
+
+    storyboard_html = storyboard_html.replaceAll("##columns##", all_columns_html);
+    storyboard_html = storyboard_html.replaceAll("##subcolumns##", all_subcolumns_html);
+    storyboard_html = storyboard_html.replaceAll("##reference##", all_reference_html);
+    storyboard_html = storyboard_html.replaceAll("##visual##", all_visual_html);
+    storyboard_html = storyboard_html.replaceAll("##audio##", all_audio_html);
+    storyboard_html = storyboard_html.replaceAll("##copy##", all_copy_html);
+    storyboard_html = storyboard_html.replaceAll("##comments##", all_comments_html);
+
+    $("#storyboard").html(storyboard_html);
+}
+
 function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {
     if (able_to_regenerate) {
         $('#btnGenerate').text("Regenerate");

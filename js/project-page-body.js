@@ -102,6 +102,7 @@ Webflow.push(function () {
                     let able_to_generate = false;
                     let able_to_save_draft = true;
                     calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
+                    generateStoryboard(res);
                 })
                 .fail((res) => {
                     console.log(res);
