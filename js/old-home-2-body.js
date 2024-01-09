@@ -156,11 +156,9 @@ $('#btnCreateProject').click(function (e) {
     const formAction = BASE_ENDPOINT + "/projects";
 
     var email = ""
-    memberstack.getCurrentMember().then(({ data: member }) => {   
-        if (member) {
-          email = member.auth.email;
-        }
-      })
+    if (member) {
+        email = member.email;
+    }
 
     var product_selector = document.getElementById("selProduct");
     var audience_selector = document.getElementById("selAudience");
