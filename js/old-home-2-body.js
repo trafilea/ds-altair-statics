@@ -154,10 +154,9 @@ $('#btnCreateProject').click(function (e) {
 
     const formMethod = "POST";
     const formAction = BASE_ENDPOINT + "/projects";
-
-    var email = ""
-    if (member) {
-        email = member.email;
+    
+    if (EMAIL) {
+        email = EMAIL;
     }
 
     var product_selector = document.getElementById("selProduct");
