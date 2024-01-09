@@ -155,10 +155,12 @@ $('#btnCreateProject').click(function (e) {
     const formMethod = "POST";
     const formAction = BASE_ENDPOINT + "/projects";
 
-    // const memberstack = memberstackDOM.init({
-    //     publicKey: "pk_sb_56175f35f6f9714cb811",
-    // });
-    var user = memberstack.getCurrentMember()
+    var email = ""
+    memberstack.getCurrentMember().then(({ data: member }) => {   
+        if (member) {
+          email = member.auth.email;
+        }
+      })
 
     var product_selector = document.getElementById("selProduct");
     var audience_selector = document.getElementById("selAudience");
@@ -205,7 +207,7 @@ $('#btnCreateProject').click(function (e) {
             ad_id: parseInt(ad_id),
             user_id: 1,
             country_id: parseInt(country_id),
-            user: user,
+            email: email,
         }),
         beforeSend: function () {
         //$('#btnSubmit').val('Please wait...');
