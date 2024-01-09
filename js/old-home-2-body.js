@@ -1,4 +1,3 @@
-import memberstackDOM from "@memberstack/dom";
 var Webflow = Webflow || [];
 Webflow.push(function () {
 
@@ -156,7 +155,6 @@ $('#btnCreateProject').click(function (e) {
     const formMethod = "POST";
     const formAction = BASE_ENDPOINT + "/projects";
 
-    // const memberstack = window.$memberstackDom
     const memberstack = memberstackDOM.init({
         publicKey: "pk_sb_56175f35f6f9714cb811",
     });
