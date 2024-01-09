@@ -1,3 +1,4 @@
+import memberstackDOM from "@memberstack/dom";
 var Webflow = Webflow || [];
 Webflow.push(function () {
 
@@ -155,6 +156,12 @@ $('#btnCreateProject').click(function (e) {
     const formMethod = "POST";
     const formAction = BASE_ENDPOINT + "/projects";
 
+    // const memberstack = window.$memberstackDom
+    const memberstack = memberstackDOM.init({
+        publicKey: "pk_sb_56175f35f6f9714cb811",
+    });
+    var user = memberstack.getCurrentMember()
+
     var product_selector = document.getElementById("selProduct");
     var audience_selector = document.getElementById("selAudience");
     var country_selector = document.getElementById("selCountry");
@@ -200,6 +207,7 @@ $('#btnCreateProject').click(function (e) {
             ad_id: parseInt(ad_id),
             user_id: 1,
             country_id: parseInt(country_id),
+            user: user,
         }),
         beforeSend: function () {
         //$('#btnSubmit').val('Please wait...');
