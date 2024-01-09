@@ -155,9 +155,9 @@ $('#btnCreateProject').click(function (e) {
     const formMethod = "POST";
     const formAction = BASE_ENDPOINT + "/projects";
 
-    const memberstack = memberstackDOM.init({
-        publicKey: "pk_sb_56175f35f6f9714cb811",
-    });
+    // const memberstack = memberstackDOM.init({
+    //     publicKey: "pk_sb_56175f35f6f9714cb811",
+    // });
     var user = memberstack.getCurrentMember()
 
     var product_selector = document.getElementById("selProduct");
