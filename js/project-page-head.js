@@ -397,7 +397,7 @@ function getBenchmarks(ad_id) {
                         
                         var benchmark_text = ""
 
-                        benchmark_obj = benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"];for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
+                        for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
                             for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
                                 for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
                                     benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "\n";
@@ -417,7 +417,7 @@ function getBenchmarks(ad_id) {
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
                     var benchmark_text = ""
 
-                    benchmark_obj = benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"];for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
+                    for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
                         for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
                             for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
                                 benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "\n";
