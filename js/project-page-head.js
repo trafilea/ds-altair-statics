@@ -400,7 +400,7 @@ function getBenchmarks(ad_id) {
                         for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
                             for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
                                 for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
-                                    benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "\n";
+                                    benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "<br><br>";
                                 }
                             }
                         }
@@ -420,7 +420,7 @@ function getBenchmarks(ad_id) {
                     for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
                         for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
                             for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
-                                benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "\n";
+                                benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "<br><br>";
                             }
                         }
                     }
