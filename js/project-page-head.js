@@ -1,242 +1,57 @@
-function generateStoryboard(gpt_results) {
-    gpt_results = {
-        "columns": [
-            {
-                "name": "attention",
-                "spans": 1
-            },
-            {
-                "name": "interest",
-                "spans": 3
-            },
-            {
-                "name": "block_1",
-                "spans": 1
-            },
-            {
-                "name": "block_2",
-                "spans": 3
-            },
-            {
-                "name": "block_3",
-                "spans": 2
-            },
-            {
-                "name": "block_1",
-                "spans": 1
+function storyboardParse(benchmarkResponse) {
+    // Given a benchmark storyboard GPT response, parses it and returned in json-like format.
+    // Params:
+    // benchmarkResponse (string): benchmark storyboard GPT response in JSON string format
+    // Returns:
+    // string: json-like string
+
+    // Init lists to populate with the needed values
+    let columns = [];
+    let subcolumns = [];
+    let reference = [];
+    let visual = [];
+    let audio = [];
+    let copy = [];
+    let comments = [];
+
+    let benchmarkContent = JSON.parse(benchmarkResponse);
+
+    // Iterate through benchmark to parse the format
+    for (let key in benchmarkContent) {
+        let value = benchmarkContent[key];
+        for (let key_ in value) {
+            let value_ = value[key_];
+            columns.push({ "name": key_, "spans": Object.keys(value_).length });
+
+            for (let key__ in value_) {
+                let value__ = value_[key__];
+                subcolumns.push({ "name": key__ });
+
+                reference.push({ "content": value__["image"] });
+                visual.push({ "content": value__["image_description"] });
+                copy.push({ "content": value__["video_highlight"] });
+                audio.push({ "content": value__["audio_copy"] });
+                comments.push({ "content": value__["comment"] });
             }
-        ],
-        "sub_columns": [
-            {
-                "name": "attention"
-            },
-            {
-                "name": "product_demo"
-            },
-            {
-                "name": "product_result"
-            },
-            {
-                "name": "price"
-            },
-            {
-                "name": "content_block_1"
-            },
-            {
-                "name": "content_block_1"
-            },
-            {
-                "name": "content_block_2"
-            },
-            {
-                "name": "content_block_3"
-            },
-            {
-                "name": "content_block_1"
-            },
-            {
-                "name": "content_block_2"
-            },
-            {
-                "name": "content_block_1"
-            }
-        ],
-        "reference": [
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            },
-            {
-                "content": "https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda13_image%209.png"
-            }
-        ],
-        "visual": [
-            {
-                "content": "A woman showing her body shape, specially her butt"
-            },
-            {
-                "content": "A woman showing her butt with pain points: bulges and cellulitis"
-            },
-            {
-                "content": "The same woman as before showing her butt with no signs of cellulitis and bulges"
-            },
-            {
-                "content": "Same woman showing her butt from other positions"
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            }
-        ],
-        "audio": [
-            {
-                "content": "My husband went, did you get a butt lift?"
-            },
-            {
-                "content": "Let me show you how I turn my booty from this"
-            },
-            {
-                "content": "To this"
-            },
-            {
-                "content": "For less than than 50 bucks"
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            }
-        ],
-        "copy": [
-            {
-                "content": "Butt lift?"
-            },
-            {
-                "content": "This"
-            },
-            {
-                "content": "To this"
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            }
-        ],
-        "comments": [
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            },
-            {
-                "content": ""
-            }
-        ]
+        }
     }
+
+    // Build json-like parsedBenchmark string
+    let parsedBenchmark = JSON.stringify({
+        "columns": columns,
+        "sub_columns": subcolumns,
+        "reference": reference,
+        "visual": visual,
+        "audio": audio,
+        "copy": copy,
+        "comments": comments
+    }, null, 2);
+
+    return JSON.parse(parsedBenchmark);
+}
+
+function generateStoryboard(gpt_results) {
+    gpt_results = storyboardParse(gpt_results);
 
     storyboard_html = '<div class="container-3"><div class="section-3 chart"><div class="price-table"><div class="price-table_options"> <div id="price-card-slider" class="swiper cc-price-table"> <div class="swiper-wrapper cc-price-table prueba"> <div class="swiper-slide cc-price-table"> <div name="block" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##columns## </div> <div name="subblock" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##subcolumns## </div> <div class="price-table_row"> <div class="price-table_cell cc-title reference"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Reference</span></div> </div> ##reference## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda1b_Group-1.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Visual</span></div> </div> ##visual## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda19_Group%20856.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Audio</span></div> </div> ##audio## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Copy</span></div> </div> ##copy## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda17_Vector.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Comments</span></div> </div> ##comments## </div> </div> </div> </div> </div></div></div></div>'
     column_html = '<div class="price-table_cell cc-callout cc-header subhero" style="width: ##width##;"><div class="u-text-semibold subhero">##content##</div></div>'
@@ -275,7 +90,7 @@ function generateStoryboard(gpt_results) {
         var reference = gpt_results["reference"][i];
         var reference_content = reference["content"];
         var reference_html_new = reference_html.replaceAll("##content##", reference_content);
-        reference_html_new = reference_html_new.replaceAll("##src_img##", reference_content);
+        reference_html_new = reference_html_new.replaceAll("##src_img##", IMG_ENDPOINT + reference_content);
         all_reference_html += reference_html_new;
 
         var visual = gpt_results["visual"][i];
