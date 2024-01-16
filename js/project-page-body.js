@@ -95,7 +95,7 @@ Webflow.push(function () {
                     res = res["text"]
                     clearInterval(intervalId);
 
-                    $("#txtResults").html("<br><br><br><br><br>" + res.replaceAll("%%", "<br><br>"));
+                    
                     hideOverlay();
                     
                     let able_to_regenerate = true;
