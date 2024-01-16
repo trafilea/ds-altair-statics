@@ -50,6 +50,11 @@ function storyboardParse(benchmarkResponse) {
     return JSON.parse(parsedBenchmark);
 }
 
+// the following function takes a string of the form "12.asd" and returns "asd"
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+
 function generateStoryboard(gpt_results) {
     gpt_results = storyboardParse(gpt_results);
 
@@ -75,7 +80,7 @@ function generateStoryboard(gpt_results) {
         var column_name = column["name"];
         var column_spans = column["spans"];
 
-        var column_html_new = column_html.replaceAll("##content##", column_name);
+        var column_html_new = column_html.replaceAll("##content##", getExtension(column_name));
         column_html_new = column_html_new.replaceAll("##width##", (248 * column_spans + 10 * (column_spans - 1)) + "px");
         all_columns_html += column_html_new;
     }
@@ -84,7 +89,7 @@ function generateStoryboard(gpt_results) {
         var subcolumn = gpt_results["sub_columns"][i];
         var subcolumn_name = subcolumn["name"];
 
-        var subcolumn_html_new = subcolumn_html.replaceAll("##content##", subcolumn_name);
+        var subcolumn_html_new = subcolumn_html.replaceAll("##content##", getExtension(subcolumn_name));
         all_subcolumns_html += subcolumn_html_new;
 
         var reference = gpt_results["reference"][i];
