@@ -75,6 +75,7 @@ function generateStoryboard(gpt_results) {
     all_audio_html = ''
     all_copy_html = ''
     all_comments_html = ''
+    all_audio_text = ''
 
     for (var i = 0; i < gpt_results["columns"].length; i++) {
         var column = gpt_results["columns"][i];
@@ -108,6 +109,7 @@ function generateStoryboard(gpt_results) {
         var audio_content = audio["content"];
         var audio_html_new = audio_html.replaceAll("##content##", audio_content);
         all_audio_html += audio_html_new;
+        all_audio_text += audio_content + "\n";
 
         var copy = gpt_results["copy"][i];
         var copy_content = copy["content"];
@@ -128,7 +130,7 @@ function generateStoryboard(gpt_results) {
     storyboard_html = storyboard_html.replaceAll("##copy##", all_copy_html);
     storyboard_html = storyboard_html.replaceAll("##comments##", all_comments_html);
 
-    $("#txtResults").html("<br><br><br><br><br>" + all_copy_html.replaceAll("%%", "<br><br>"));
+    $("#txtResults").html("<br><br><br><br><br>" + all_audio_text.replaceAll("%%", "<br><br>"));
 
     $("#storyboard").html(storyboard_html);
 }
