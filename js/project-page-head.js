@@ -128,6 +128,8 @@ function generateStoryboard(gpt_results) {
     storyboard_html = storyboard_html.replaceAll("##copy##", all_copy_html);
     storyboard_html = storyboard_html.replaceAll("##comments##", all_comments_html);
 
+    $("#txtResults").html("<br><br><br><br><br>" + all_copy_html.replaceAll("%%", "<br><br>"));
+
     $("#storyboard").html(storyboard_html);
 }
 
