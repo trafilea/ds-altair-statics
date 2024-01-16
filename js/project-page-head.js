@@ -54,6 +54,7 @@ function storyboardParse(benchmarkResponse) {
 function getExtension(filename) {
     var parts = filename.split('.');
     return parts[parts.length - 1];
+}
 
 function generateStoryboard(gpt_results) {
     gpt_results = storyboardParse(gpt_results);
