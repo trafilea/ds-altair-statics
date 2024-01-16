@@ -109,7 +109,7 @@ function generateStoryboard(gpt_results) {
         var audio_content = audio["content"];
         var audio_html_new = audio_html.replaceAll("##content##", audio_content);
         all_audio_html += audio_html_new;
-        all_audio_text += audio_content + "\n";
+        all_audio_text += audio_content + "<br><br>";
 
         var copy = gpt_results["copy"][i];
         var copy_content = copy["content"];
