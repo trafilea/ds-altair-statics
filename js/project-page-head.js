@@ -1,3 +1,140 @@
+function storyboardParse(benchmarkResponse) {
+    // Given a benchmark storyboard GPT response, parses it and returned in json-like format.
+    // Params:
+    // benchmarkResponse (string): benchmark storyboard GPT response in JSON string format
+    // Returns:
+    // string: json-like string
+
+    // Init lists to populate with the needed values
+    let columns = [];
+    let subcolumns = [];
+    let reference = [];
+    let visual = [];
+    let audio = [];
+    let copy = [];
+    let comments = [];
+
+    let benchmarkContent = JSON.parse(benchmarkResponse);
+
+    // Iterate through benchmark to parse the format
+    for (let key in benchmarkContent) {
+        let value = benchmarkContent[key];
+        for (let key_ in value) {
+            let value_ = value[key_];
+            columns.push({ "name": key_, "spans": Object.keys(value_).length });
+
+            for (let key__ in value_) {
+                let value__ = value_[key__];
+                subcolumns.push({ "name": key__ });
+
+                reference.push({ "content": value__["image"] });
+                visual.push({ "content": value__["image_description"] });
+                copy.push({ "content": value__["video_highlight"] });
+                audio.push({ "content": value__["audio_copy"] });
+                comments.push({ "content": value__["comment"] });
+            }
+        }
+    }
+
+    // Build json-like parsedBenchmark string
+    let parsedBenchmark = JSON.stringify({
+        "columns": columns,
+        "sub_columns": subcolumns,
+        "reference": reference,
+        "visual": visual,
+        "audio": audio,
+        "copy": copy,
+        "comments": comments
+    }, null, 2);
+
+    return JSON.parse(parsedBenchmark);
+}
+
+// the following function takes a string of the form "12.asd" and returns "asd"
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+}
+
+function generateStoryboard(gpt_results) {
+    gpt_results = storyboardParse(gpt_results);
+
+    storyboard_html = '<div class="container-3"><div class="section-3 chart"><div class="price-table"><div class="price-table_options"> <div id="price-card-slider" class="swiper cc-price-table"> <div class="swiper-wrapper cc-price-table prueba"> <div class="swiper-slide cc-price-table"> <div name="block" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##columns## </div> <div name="subblock" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##subcolumns## </div> <div class="price-table_row"> <div class="price-table_cell cc-title reference"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Reference</span></div> </div> ##reference## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda1b_Group-1.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Visual</span></div> </div> ##visual## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda19_Group%20856.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Audio</span></div> </div> ##audio## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Copy</span></div> </div> ##copy## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda17_Vector.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Comments</span></div> </div> ##comments## </div> </div> </div> </div> </div></div></div></div>'
+    column_html = '<div class="price-table_cell cc-callout cc-header subhero" style="width: ##width##;"><div class="u-text-semibold subhero">##content##</div></div>'
+    subcolumn_html = '<div class="price-table_cell cc-header"><div class="u-text-semibold">##content##</div></div>'
+    reference_html = '<div class="price-table_cell cc-callout"><img src="##src_img##" alt=""></div>'
+    visual_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    audio_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    copy_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    comments_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+
+    all_columns_html = ''
+    all_subcolumns_html = ''
+    all_reference_html = ''
+    all_visual_html = ''
+    all_audio_html = ''
+    all_copy_html = ''
+    all_comments_html = ''
+    all_audio_text = ''
+
+    for (var i = 0; i < gpt_results["columns"].length; i++) {
+        var column = gpt_results["columns"][i];
+        var column_name = column["name"];
+        var column_spans = column["spans"];
+
+        var column_html_new = column_html.replaceAll("##content##", getExtension(column_name));
+        column_html_new = column_html_new.replaceAll("##width##", (248 * column_spans + 10 * (column_spans - 1)) + "px");
+        all_columns_html += column_html_new;
+    }
+
+    for (var i = 0; i < gpt_results["sub_columns"].length; i++) {
+        var subcolumn = gpt_results["sub_columns"][i];
+        var subcolumn_name = subcolumn["name"];
+
+        var subcolumn_html_new = subcolumn_html.replaceAll("##content##", getExtension(subcolumn_name));
+        all_subcolumns_html += subcolumn_html_new;
+
+        var reference = gpt_results["reference"][i];
+        var reference_content = reference["content"];
+        var reference_html_new = reference_html.replaceAll("##content##", reference_content);
+        reference_html_new = reference_html_new.replaceAll("##src_img##", IMG_ENDPOINT + reference_content);
+        all_reference_html += reference_html_new;
+
+        var visual = gpt_results["visual"][i];
+        var visual_content = visual["content"];
+        var visual_html_new = visual_html.replaceAll("##content##", visual_content);
+        all_visual_html += visual_html_new;
+
+        var audio = gpt_results["audio"][i];
+        var audio_content = audio["content"];
+        var audio_html_new = audio_html.replaceAll("##content##", audio_content);
+        all_audio_html += audio_html_new;
+        all_audio_text += audio_content + "<br><br>";
+
+        var copy = gpt_results["copy"][i];
+        var copy_content = copy["content"];
+        var copy_html_new = copy_html.replaceAll("##content##", copy_content);
+        all_copy_html += copy_html_new;
+
+        var comments = gpt_results["comments"][i];
+        var comments_content = comments["content"];
+        var comments_html_new = comments_html.replaceAll("##content##", comments_content);
+        all_comments_html += comments_html_new;
+    }
+
+    storyboard_html = storyboard_html.replaceAll("##columns##", all_columns_html);
+    storyboard_html = storyboard_html.replaceAll("##subcolumns##", all_subcolumns_html);
+    storyboard_html = storyboard_html.replaceAll("##reference##", all_reference_html);
+    storyboard_html = storyboard_html.replaceAll("##visual##", all_visual_html);
+    storyboard_html = storyboard_html.replaceAll("##audio##", all_audio_html);
+    storyboard_html = storyboard_html.replaceAll("##copy##", all_copy_html);
+    storyboard_html = storyboard_html.replaceAll("##comments##", all_comments_html);
+
+    $("#txtResults").html("<br><br><br><br><br>" + all_audio_text.replaceAll("%%", "<br><br>"));
+
+    $("#storyboard").html(storyboard_html);
+}
+
 function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {
     if (able_to_regenerate) {
         $('#btnGenerate').text("Regenerate");
@@ -39,22 +176,15 @@ function hideOverlay() {
     $("#overlay").hide();
 }
 function getBenchmark(benchmark_id) {
-    const formMethod = "POST";
-    const formAction = BASE_ENDPOINT + "/get_benchmark";
-    let my_data = {
-        "benchmark_id": benchmark_id
-    }
-
+    const formMethod = "GET";
+    const formAction = BASE_ENDPOINT + "/benchmarks/" + benchmark_id;
 
     endpoint = formAction
     return $.ajax({
         method: formMethod,
         url: endpoint,
-        data: JSON.stringify(my_data),
-        beforeSend: function () {//$('#btnSubmit').val('Please wait...');
-        }
     }).done((res) => {
-        return res["benchmark"];
+        return res;
     }
     ).fail((res) => {
         alert(res);
@@ -64,7 +194,7 @@ function getBenchmark(benchmark_id) {
 
 function getBenchmarks(ad_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_benchmarks?ad_id=" + ad_id;
+    const formAction = BASE_ENDPOINT + "/ads/" + ad_id + "/benchmarks";
 
     endpoint = formAction
     $.ajax({
@@ -80,23 +210,26 @@ function getBenchmarks(ad_id) {
             var benchmarks = res["benchmarks"];
             for (var i = 0; i < benchmarks.length; i++) {
                 var opt = document.createElement('option');
-                opt.value = benchmarks[i]["benchmark_id"];
-                opt.innerHTML = benchmarks[i]["benchmark_description"];
-                opt.title = benchmarks[i]["benchmark_long_description"];
+                opt.value = benchmarks[i]["id"];
+                opt.innerHTML = benchmarks[i]["name"];
+                opt.title = benchmarks[i]["description"];
                 benchmark_selector.appendChild(opt);
 
                 // if it's the first one, populate the benchmark content
                 if (i == 0) {
-                    getBenchmark(benchmarks[i]["benchmark_id"]).then((benchmark_obj) => {
-                        var link = benchmark_obj["benchmark"]["link"];
-                        benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
+                    getBenchmark(benchmarks[i]["id"]).then((benchmark_obj) => {
+                        var link = benchmark_obj["link"];
                         
                         var benchmark_text = ""
-                        for (let key in benchmark_obj) {
-                            if (benchmark_obj.hasOwnProperty(key)) {
-                                benchmark_text += benchmark_obj[key];
+
+                        for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
+                            for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
+                                for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
+                                    benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "<br><br>";
+                                }
                             }
                         }
+                        
                         let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
                         $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                         // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
@@ -107,13 +240,16 @@ function getBenchmarks(ad_id) {
             benchmark_selector.addEventListener('change', function () {
                 const selectedBenchmarkId = this.value;
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
-                    benchmark_obj = benchmark_obj["benchmark"]["benchmark_information"]["benchmark_content"];
                     var benchmark_text = ""
-                    for (let key in benchmark_obj) {
-                        if (benchmark_obj.hasOwnProperty(key)) {
-                            benchmark_text += benchmark_obj[key];
+
+                    for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
+                        for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
+                            for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
+                                benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "<br><br>";
+                            }
                         }
                     }
+
                     let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
                     $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                 });

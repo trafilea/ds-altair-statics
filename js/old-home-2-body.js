@@ -3,7 +3,7 @@ Webflow.push(function () {
 
 function getBrands() {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_brands";
+    const formAction = BASE_ENDPOINT + "/brands";
 
     endpoint = formAction
     $.ajax({
@@ -20,14 +20,14 @@ function getBrands() {
     var brands = res["brands"];
     for (var i = 0; i < brands.length; i++) {
         var opt = document.createElement('option');
-        opt.value = brands[i]["brand_id"];
-        opt.innerHTML = brands[i]["brand_name"];
+        opt.value = brands[i]["id"];
+        opt.innerHTML = brands[i]["name"];
         brand_selector.appendChild(opt);
         
         if (i == 0) {
-        getProducts(brands[i]["brand_id"]);
-        getAudiences(brands[i]["brand_id"]);
-        getCountries(brands[i]["brand_id"]);
+        getProducts(brands[i]["id"]);
+        getAudiences(brands[i]["id"]);
+        getCountries(brands[i]["id"]);
         }
     }
 
@@ -40,7 +40,7 @@ function getBrands() {
 function getProducts(brand_id) {
 
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_products?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/brands/" + brand_id + "/products";
 
     endpoint = formAction
     $.ajax({
@@ -60,8 +60,8 @@ function getProducts(brand_id) {
         var products = res["products"];
         for (var i = 0; i < products.length; i++) {
             var opt = document.createElement('option');
-            opt.value = products[i]["product_id"];
-            opt.innerHTML = products[i]["product_name"];
+            opt.value = products[i]["id"];
+            opt.innerHTML = products[i]["name"];
             product_selector.appendChild(opt);
         }
 
@@ -73,7 +73,7 @@ function getProducts(brand_id) {
 
 function getAudiences(brand_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_audiences?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/brands/" + brand_id + "/audiences";
 
     endpoint = formAction
     $.ajax({
@@ -94,8 +94,8 @@ function getAudiences(brand_id) {
         var audiences = res["audiences"];
         for (var i = 0; i < audiences.length; i++) {
             var opt = document.createElement('option');
-            opt.value = audiences[i]["audience_id"];
-            opt.innerHTML = audiences[i]["audience_description"];
+            opt.value = audiences[i]["id"];
+            opt.innerHTML = audiences[i]["description"];
             audience_selector.appendChild(opt);
         }
 
@@ -107,7 +107,7 @@ function getAudiences(brand_id) {
 
 function getCountries(brand_id) {
     const formMethod = "GET";
-    const formAction = BASE_ENDPOINT + "/get_countries?brand_id=" + brand_id;
+    const formAction = BASE_ENDPOINT + "/brands/" + brand_id + "/countries";
 
     endpoint = formAction
     $.ajax({
@@ -127,8 +127,8 @@ function getCountries(brand_id) {
         var countries = res["countries"];
         for (var i = 0; i < countries.length; i++) {
             var opt = document.createElement('option');
-            opt.value = countries[i]["country_id"];
-            opt.innerHTML = countries[i]["country_name"];
+            opt.value = countries[i]["id"];
+            opt.innerHTML = countries[i]["name"];
             country_selector.appendChild(opt);
         }
 
@@ -153,7 +153,11 @@ $('#btnCreateProject').click(function (e) {
     e.preventDefault();
 
     const formMethod = "POST";
-    const formAction = BASE_ENDPOINT + "/create_project";
+    const formAction = BASE_ENDPOINT + "/projects";
+    
+    if (EMAIL) {
+        email = EMAIL;
+    }
 
     var product_selector = document.getElementById("selProduct");
     var audience_selector = document.getElementById("selAudience");
@@ -170,37 +174,37 @@ $('#btnCreateProject').click(function (e) {
     
     // check if radio button radLanding is checked
     var landing = document.getElementById("radLanding");
-    var landing_page = false;
+    var ad_id = 0;
     if (landing.checked == true) {
-        landing_page = true;
+        ad_id = 3;
     }
 
     var lead_ad = document.getElementById("radLeadAd");
-    var lead_ad_check = false;
     if (lead_ad.checked == true) {
-        lead_ad_check = true;
+        ad_id = 1;
     }
 
     var short_ad = document.getElementById("radShortAd");
-    var short_ad_check = false;
     if (short_ad.checked == true) {
-        short_ad_check = true;
+        ad_id = 2;
     }
 
     endpoint = formAction
     $.ajax({
         method: formMethod,
         url: endpoint,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
         data: JSON.stringify(
         {
-            project_name: project_name,
-            audience_id: audience_id,
-            product_id: product_id,
+            name: project_name,
+            audience_id: parseInt(audience_id),
+            product_id: parseInt(product_id),
             angle: angle,
-            project_name: project_name,
-            landing_page: landing_page,
-            lead_ad: lead_ad_check,
-            short_ad: short_ad_check,
+            ad_id: parseInt(ad_id),
+            user_id: 1,
+            country_id: parseInt(country_id),
+            email: email,
         }),
         beforeSend: function () {
         //$('#btnSubmit').val('Please wait...');
@@ -213,7 +217,7 @@ $('#btnCreateProject').click(function (e) {
         ad_id = res["ad_id"]
 
         // redirect to https://altair-trafilea.webflow.io/project-page with the project id
-        window.location.href = "https://api-integration-test-e340db.webflow.io/members/project-page?project_id=" + project_id + "&angle_id=" + angle_id + "&ad_id=" + ad_id;
+        window.location.href = CURRENT_DOMAIN + "/members/project-page?project_id=" + project_id + "&angle_id=" + angle_id + "&ad_id=" + ad_id;
 
     })
     .fail((res) => {
