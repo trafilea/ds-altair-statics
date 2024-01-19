@@ -193,7 +193,7 @@ $('body').on('click', '.draft-item', function () {
             able_to_generate = false;
             able_to_save_draft = false;
             calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
-            
+            generateStoryboard(res["llm_response"]);
         })
         .fail((res) => {
             console.log(res);
