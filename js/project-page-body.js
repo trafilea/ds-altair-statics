@@ -216,7 +216,8 @@ $('body').on('click', '.draft-item', function () {
             data: JSON.stringify({
                 project_id: parseInt(project_id),
                 benchmark_id: parseInt(benchmark),
-                angle: angle
+                angle: angle,
+                script_only: true,
             }),
             beforeSend: function () {
                 showOverlay();

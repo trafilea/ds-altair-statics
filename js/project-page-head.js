@@ -133,6 +133,7 @@ function generateStoryboard(gpt_results) {
     $("#txtResults").html("<br><br><br><br><br>" + all_audio_text.replaceAll("%%", "<br><br>"));
 
     $("#storyboard").html(storyboard_html);
+    $("#storyboard").hide();
 }
 
 function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {
