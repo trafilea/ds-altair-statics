@@ -9,7 +9,23 @@ Webflow.push(function () {
     // on chage for the selBenchmark dropdown, get the benchmark content using the getBenchmark function
     $("#selBenchmark").change(function () {
         var benchmark_id = $("#selBenchmark").val();
-        getBenchmark(benchmark_id);
+        getBenchmark(benchmark_id).then((benchmark_obj) => {
+            var link = benchmark_obj["link"];
+            
+            var benchmark_text = ""
+
+            for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
+                for (var j in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i]) {
+                    for (var k in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j]) {
+                        benchmark_text += benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"][i][j][k]["audio_copy"] + "<br><br>";
+                    }
+                }
+            }
+            
+            let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
+            $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
+            // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
+        });
     });
 
     var url = new URL(window.location.href);
@@ -103,6 +119,7 @@ Webflow.push(function () {
                     let able_to_save_draft = true;
                     calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
                     generateStoryboard(res);
+
                 })
                 .fail((res) => {
                     console.log(res);
