@@ -18,15 +18,9 @@ Webflow.push(function () {
             })
                 .done((res) => {
                     console.log(res);
-                    res = res["text"]
                     clearInterval(intervalId);
-                    
-                    // json_data = JSON.parse(res);
-                    // swiped_benchmark_str = json_data['choices'][0]['message']['content'];
-                    swiped_benchmark_str = res;
-                    document.getElementById("txtBenchmarkSwiped").value = swiped_benchmark_str;
+                    document.getElementById("txtBenchmarkSwiped").value = res;
                     $('#btnSwipe').val('(Re) Swipe');
-
                 })
                 .fail((res) => {
                     console.log(res);
