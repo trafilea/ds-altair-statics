@@ -21,12 +21,11 @@ Webflow.push(function () {
                     res = res["text"]
                     clearInterval(intervalId);
                     
-                    hideOverlay();
-                    
                     // json_data = JSON.parse(res);
                     // swiped_benchmark_str = json_data['choices'][0]['message']['content'];
                     swiped_benchmark_str = res;
                     document.getElementById("txtBenchmarkSwiped").value = swiped_benchmark_str;
+                    $('#btnSwipe').val('(Re) Swipe');
 
                 })
                 .fail((res) => {
@@ -61,7 +60,6 @@ Webflow.push(function () {
             }
         }).done((res)=>{
             debugger;
-            $('#btnSwipe').val('(Re) Swipe');
             var request_id = res["request_id"];
             localStorage.setItem('request_id', request_id);
             pollRequestStatus(request_id);
