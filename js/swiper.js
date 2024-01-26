@@ -6,9 +6,15 @@ Webflow.push(function () {
         // if the response is a failure it'll try again. otherwise it'll break
         // only do the request every 5 seconds
         intervalId = setInterval(function () {
+
             $.ajax({
-                method: "GET",
-                url: BASE_ENDPOINT_SANDBOX + "/get_results?request_id=" + request_id
+                // method: "GET",
+                // url: BASE_ENDPOINT_SANDBOX + "/get_results?request_id=" + request_id
+                method: "POST",
+                url: BASE_ENDPOINT_SANDBOX + "/get_results",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({"request_id": request_id}),
             })
                 .done((res) => {
                     console.log(res);
