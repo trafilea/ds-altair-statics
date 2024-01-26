@@ -1,5 +1,33 @@
 var Webflow = Webflow || [];
 Webflow.push(function () {
+    // pollRequestStatus will poll the status of the request every 5 seconds, if the response is a failure it'll try again. otherwise it'll break
+    function pollRequestStatus(request_id) {
+        // poll the status of the request every 5 seconds, the endpoint is BASE_ENDPOINT/get_results
+        // if the response is a failure it'll try again. otherwise it'll break
+        // only do the request every 5 seconds
+        intervalId = setInterval(function () {
+            $.ajax({
+                method: "GET",
+                url: BASE_ENDPOINT_SANDBOX + "/get_results?request_id=" + request_id
+            })
+                .done((res) => {
+                    console.log(res);
+                    res = res["text"]
+                    clearInterval(intervalId);
+                    
+                    hideOverlay();
+                    
+                    // json_data = JSON.parse(res);
+                    // swiped_benchmark_str = json_data['choices'][0]['message']['content'];
+                    swiped_benchmark_str = res;
+                    document.getElementById("txtBenchmarkSwiped").value = swiped_benchmark_str;
+
+                })
+                .fail((res) => {
+                    console.log(res);
+                })
+        }, 5000);
+    }
 
     $("#btnSwipe").click(function (){
         // ad type text loaded
@@ -28,9 +56,9 @@ Webflow.push(function () {
         }).done((res)=>{
             debugger;
             $('#btnSwipe').val('(Re) Swipe');
-            json_data = JSON.parse(res);
-            swiped_benchmark_str = json_data['choices'][0]['message']['content'];
-            document.getElementById("txtBenchmarkSwiped").value = swiped_benchmark_str;
+            var request_id = res["request_id"];
+            localStorage.setItem('request_id', request_id);
+            pollRequestStatus(request_id);
         }
         ).fail((res)=>{
             console.log(res);
