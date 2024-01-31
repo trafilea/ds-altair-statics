@@ -4,7 +4,8 @@ Webflow.push(function () {
 	let able_to_regenerate = false;
     let able_to_save_draft = false;
     let able_to_generate = true;
-    calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) 
+    let able_to_generate_storyboard = false;
+    calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard) 
 
     // on chage for the selBenchmark dropdown, get the benchmark content using the getBenchmark function
     $("#selBenchmark").change(function () {
@@ -117,7 +118,8 @@ Webflow.push(function () {
                     let able_to_regenerate = true;
                     let able_to_generate = false;
                     let able_to_save_draft = true;
-                    calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
+                    let able_to_generate_storyboard = !show_storyboard;
+                    calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard)
                     generateStoryboard(res, show_storyboard);
 
                 })
@@ -179,7 +181,8 @@ Webflow.push(function () {
             let able_to_regenerate = true;
             let able_to_generate = false;
             let able_to_save_draft = false;
-            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
+            let able_to_generate_storyboard = false;
+            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard)
         }
         ).fail((res)=>{
             console.log(res);
@@ -205,14 +208,16 @@ $('body').on('click', '.draft-item', function () {
             $("#txtResults").html(res["llm_response"].replaceAll("%%", "<br><br>"));
             // populate the big idea
             $("#txtBigIdea").val(res["angle_insight"]);
+
+            var show_storyboard = res["llm_response"].includes("image1.png");
             
             able_to_regenerate = true;
             able_to_generate = false;
             able_to_save_draft = false;
-            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
+            able_to_generate_storyboard = !show_storyboard;
+            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard)
 
             // FIXME: find a better way to determine if the storyboard should be shown
-            var show_storyboard = res["llm_response"].includes("image1.png");
 
             generateStoryboard(res["llm_response"], show_storyboard);
         })

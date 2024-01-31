@@ -142,7 +142,7 @@ function generateStoryboard(gpt_results, show_storyboard) {
     }
 }
 
-function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {
+function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard) {
     if (able_to_regenerate) {
         $('#btnGenerate').text("Regenerate");
         $('#btnGenerate').removeClass("hide");
@@ -161,6 +161,13 @@ function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_genera
     }
     else {
         $('#btnSaveDraft').addClass("hide");
+    }
+
+    if (able_to_generate_storyboard) {
+        $('#btnGenerateStoryboard').removeClass("hide");
+    }
+    else {
+        $('#btnGenerateStoryboard').addClass("hide");
     }
 }
 
