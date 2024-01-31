@@ -56,7 +56,7 @@ function getExtension(filename) {
     return parts[parts.length - 1];
 }
 
-function generateStoryboard(gpt_results) {
+function generateStoryboard(gpt_results, show_storyboard) {
     gpt_results = storyboardParse(gpt_results);
 
     storyboard_html = '<div class="container-3"><div class="section-3 chart"><div class="price-table"><div class="price-table_options"> <div id="price-card-slider" class="swiper cc-price-table"> <div class="swiper-wrapper cc-price-table prueba"> <div class="swiper-slide cc-price-table"> <div name="block" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##columns## </div> <div name="subblock" class="price-table_row cc-header"> <div class="price-table_cell cc-header none"></div> ##subcolumns## </div> <div class="price-table_row"> <div class="price-table_cell cc-title reference"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Reference</span></div> </div> ##reference## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda1b_Group-1.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Visual</span></div> </div> ##visual## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda19_Group%20856.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Audio</span></div> </div> ##audio## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda15_Group.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Copy</span></div> </div> ##copy## </div> <div class="price-table_row"> <div class="price-table_cell cc-title"><img src="https://assets-global.website-files.com/657080fa4c620ab381ecce5b/6581e08717678c11a51dda17_Vector.png" loading="lazy" alt="" class="image-4"> <div class="u-text-semibold"><span class="reference">Comments</span></div> </div> ##comments## </div> </div> </div> </div> </div></div></div></div>'
@@ -133,7 +133,13 @@ function generateStoryboard(gpt_results) {
     $("#txtResults").html("<br><br><br><br><br>" + all_audio_text.replaceAll("%%", "<br><br>"));
 
     $("#storyboard").html(storyboard_html);
-    $("#storyboard").hide();
+
+    if (show_storyboard) {
+        $("#storyboard").show();
+    }
+    else {
+        $("#storyboard").hide();
+    }
 }
 
 function calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate) {

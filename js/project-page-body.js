@@ -97,7 +97,7 @@ Webflow.push(function () {
     });
 
     // pollRequestStatus will poll the status of the request every 5 seconds, if the response is a failure it'll try again. otherwise it'll break
-    function pollRequestStatus(request_id) {
+    function pollRequestStatus(request_id, show_storyboard) {
         // poll the status of the request every 5 seconds, the endpoint is BASE_ENDPOINT/get_results
         // if the response is a failure it'll try again. otherwise it'll break
         // only do the request every 5 seconds
@@ -118,7 +118,7 @@ Webflow.push(function () {
                     let able_to_generate = false;
                     let able_to_save_draft = true;
                     calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
-                    generateStoryboard(res);
+                    generateStoryboard(res, show_storyboard);
 
                 })
                 .fail((res) => {
@@ -217,6 +217,42 @@ $('body').on('click', '.draft-item', function () {
         })
     });
 
+    $("#btnGenerateStoryboard").click(function () {
+        var project_id = url.searchParams.get("project_id");
+        var benchmark = $("#selBenchmark").val();
+        var angle = $("#txtBigIdea").val();
+
+        const formMethod = "POST";
+        const formAction = BASE_ENDPOINT + "/projects/campaigns";
+
+        $.ajax({
+            method: formMethod,
+            url: formAction,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                project_id: parseInt(project_id),
+                benchmark_id: parseInt(benchmark),
+                angle: angle,
+                script_only: false,
+                previous_request_id: localStorage.getItem('request_id'),
+            }),
+            beforeSend: function () {
+                showOverlay();
+            }
+        })
+            .done((res) => {
+                console.log(res);
+                var request_id = res["request_id"];
+                localStorage.setItem('request_id', request_id);
+                pollRequestStatus(request_id, true);
+                
+            })
+            .fail((res) => {
+                console.log(res);
+            })
+    });
+
     $("#btnGenerate").click(function () {
         var project_id = url.searchParams.get("project_id");
         var benchmark = $("#selBenchmark").val();
@@ -244,7 +280,7 @@ $('body').on('click', '.draft-item', function () {
                 console.log(res);
                 var request_id = res["request_id"];
                 localStorage.setItem('request_id', request_id);
-                pollRequestStatus(request_id);
+                pollRequestStatus(request_id, false);
                 
             })
             .fail((res) => {
