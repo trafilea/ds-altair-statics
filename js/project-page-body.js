@@ -210,7 +210,11 @@ $('body').on('click', '.draft-item', function () {
             able_to_generate = false;
             able_to_save_draft = false;
             calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate)
-            generateStoryboard(res["llm_response"]);
+
+            // FIXME: find a better way to determine if the storyboard should be shown
+            var show_storyboard = res["llm_response"].includes("image1.png");
+
+            generateStoryboard(res["llm_response"], show_storyboard);
         })
         .fail((res) => {
             console.log(res);
