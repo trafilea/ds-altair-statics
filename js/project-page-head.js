@@ -288,17 +288,12 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
         $('#angleContainer').append(html_angle_new);
     }
 
-    console.log('#benchmark_' + new_angle_id + '_' + new_benchmark_id)
-    console.log($('#benchmark_' + new_angle_id + '_' + new_benchmark_id ))
-    console.log($('#benchmark_' + new_angle_id + '_' + new_benchmark_id ).length)
     if ($('.benchmark_' + new_angle_id + '_' + new_benchmark_id).length == 0) {
-        console.log("appending benchmark" + new_angle_id + '_' + new_benchmark_id + " for draft " + new_draft_id)
         // append the new benchmark
         var html_benchmark_new = html_benchmark.slice();
         html_benchmark_new = html_benchmark_new.replaceAll("##angle_id##", new_angle_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_id##", new_benchmark_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_name##", new_benchmark_name);
-        console.log(html_benchmark_new)
         $('#benchmarkContainer_' + new_angle_id).append(html_benchmark_new);
     }
 
