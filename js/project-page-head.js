@@ -298,6 +298,7 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
         html_benchmark_new = html_benchmark_new.replaceAll("##angle_id##", new_angle_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_id##", new_benchmark_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_name##", new_benchmark_name);
+        console.log(html_benchmark_new)
         $('#benchmarkContainer_' + new_angle_id).append(html_benchmark_new);
     }
 
