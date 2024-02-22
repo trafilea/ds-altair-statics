@@ -83,7 +83,9 @@ Webflow.push(function () {
                         new_benchmark_id = benchmark["benchmark_id"];
                         new_benchmark_name = benchmark["benchmark_name"];
                         new_draft_id = draft["draft_id"];
-
+                        console.log("New id variables:");
+                        console.log(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_name, new_draft_id);
+                        console.log("Before adding draft");
                         addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_name, new_draft_id);
                     }
                 }

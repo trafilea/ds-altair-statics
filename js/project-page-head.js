@@ -287,7 +287,8 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
         $('#angleContainer').append(html_angle_new);
     }
 
-
+    console.log('#benchmark_' + new_angle_id + '_' + new_benchmark_id)
+    console.log($('#benchmark_' + new_angle_id + '_' + new_benchmark_id))
     if ($('#benchmark_' + new_angle_id + '_' + new_benchmark_id).length == 0) {
         // append the new benchmark
         var html_benchmark_new = html_benchmark.replaceAll("##angle_id##", new_angle_id);
