@@ -280,7 +280,8 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
     // if it does, don't do anything.
     if ($('#angle_' + new_angle_id).length == 0) {
         // append the new angle
-        var html_angle_new = html_angle.replaceAll("##angle_id##", new_angle_id);
+        var html_angle_new = html_angle.slice();    
+        html_angle_new = html_angle_new.replaceAll("##angle_id##", new_angle_id);
         html_angle_new = html_angle_new.replaceAll("##angle_name##", new_angle_name);
         html_angle_new = html_angle_new.replaceAll("##benchmark_id##", new_benchmark_id);
         html_angle_new = html_angle_new.replaceAll("##benchmark_name##", new_benchmark_name);
@@ -293,7 +294,8 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
     if ($('#benchmark_' + new_angle_id + '_' + new_benchmark_id).length == 0) {
         console.log("appending benchmark" + new_angle_id + '_' + new_benchmark_id + " for draft " + new_draft_id)
         // append the new benchmark
-        var html_benchmark_new = html_benchmark.replaceAll("##angle_id##", new_angle_id);
+        var html_benchmark_new = html_benchmark.slice();
+        html_benchmark_new = html_benchmark_new.replaceAll("##angle_id##", new_angle_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_id##", new_benchmark_id);
         html_benchmark_new = html_benchmark_new.replaceAll("##benchmark_name##", new_benchmark_name);
         $('#benchmarkContainer_' + new_angle_id).append(html_benchmark_new);
@@ -302,7 +304,8 @@ function addDraft(new_angle_id, new_angle_name, new_benchmark_id, new_benchmark_
 
     if ($('#draft_' + new_draft_id).length == 0) {
         // append the new draft
-        var html_draft_new = html_draft.replaceAll("##angle_id##", new_angle_id);
+        var html_draft_new = html_draft.slice();
+        html_draft_new = html_draft_new.replaceAll("##angle_id##", new_angle_id);
         html_draft_new = html_draft_new.replaceAll("##benchmark_id##", new_benchmark_id);
         html_draft_new = html_draft_new.replaceAll("##draft_id##", new_draft_id);
         $('#draftContainer_' + new_angle_id + '_' + new_benchmark_id).append(html_draft_new);
