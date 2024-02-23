@@ -253,6 +253,7 @@ function getBenchmarks(ad_id) {
 
             benchmark_selector.addEventListener('change', function () {
                 const selectedBenchmarkId = this.value;
+                console.log("About to debug load benchmark")
                 console.log(selectedBenchmarkId);
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
                     var benchmark_text = ""
@@ -264,8 +265,10 @@ function getBenchmarks(ad_id) {
                             }
                         }
                     }
-
+                    console.log(benchmark_text);
+                    console.log(benchmark_obj["link"]);
                     let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
+                    console.log(benchmark_link);
                     $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                 });
             });
