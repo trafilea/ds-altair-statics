@@ -10,6 +10,8 @@ Webflow.push(function () {
     // on chage for the selBenchmark dropdown, get the benchmark content using the getBenchmark function
     $("#selBenchmark").change(function () {
         var benchmark_id = $("#selBenchmark").val();
+        console.log("About to debug load benchmark 1")
+        console.log(benchmark_id);
         getBenchmark(benchmark_id).then((benchmark_obj) => {
             var link = benchmark_obj["link"];
             
@@ -22,8 +24,10 @@ Webflow.push(function () {
                     }
                 }
             }
-            
+            console.log(benchmark_text);
             let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
+            console.log(benchmark_obj["link"]);
+            console.log(benchmark_link);
             $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
             // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
         });
