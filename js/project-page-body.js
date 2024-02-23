@@ -213,7 +213,8 @@ $('body').on('click', '.draft-item', function () {
             // populate the big idea
             $("#txtBigIdea").val(res["angle_insight"]);
 
-            var show_storyboard = res["llm_response"].includes("image1.png");
+            var show_storyboard = JSON.stringify(res["llm_response"]) !== ''
+            
             
             able_to_regenerate = true;
             able_to_generate = false;
@@ -222,7 +223,7 @@ $('body').on('click', '.draft-item', function () {
             calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard)
 
             // FIXME: find a better way to determine if the storyboard should be shown
-
+            console.log(show_storyboard);
             generateStoryboard(res["llm_response"], show_storyboard);
         })
         .fail((res) => {
