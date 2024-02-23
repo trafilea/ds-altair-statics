@@ -233,8 +233,6 @@ function getBenchmarks(ad_id) {
                 if (i == 0) {
                     getBenchmark(benchmarks[i]["id"]).then((benchmark_obj) => {
                         var link = benchmark_obj["link"];
-                        console.log("About to debug load benchmark 2")
-                        console.log(benchmarks[i]["id"]);
                         var benchmark_text = ""
 
                         for (var i in benchmark_obj["benchmark_data"]["benchmark_information"]["benchmark_content"]) {
@@ -244,10 +242,7 @@ function getBenchmarks(ad_id) {
                                 }
                             }
                         }
-                        console.log(benchmark_text);
-                        console.log(benchmark_obj["link"]);
                         let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
-                        console.log(benchmark_link);
                         $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                         // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
                     });
@@ -256,8 +251,6 @@ function getBenchmarks(ad_id) {
 
             benchmark_selector.addEventListener('change', function () {
                 const selectedBenchmarkId = this.value;
-                console.log("About to debug load benchmark")
-                console.log(selectedBenchmarkId);
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
                     var benchmark_text = ""
 
@@ -268,10 +261,7 @@ function getBenchmarks(ad_id) {
                             }
                         }
                     }
-                    console.log(benchmark_text);
-                    console.log(benchmark_obj["link"]);
                     let benchmark_link = "<a href='" + benchmark_obj["link"] + "' target='_blank'>[Link]</a><br><br>"
-                    console.log(benchmark_link);
                     $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
                 });
             });
