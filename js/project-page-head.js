@@ -253,6 +253,7 @@ function getBenchmarks(ad_id) {
 
             benchmark_selector.addEventListener('change', function () {
                 const selectedBenchmarkId = this.value;
+                console.log(selectedBenchmarkId);
                 getBenchmark(selectedBenchmarkId).then((benchmark_obj) => {
                     var benchmark_text = ""
 
