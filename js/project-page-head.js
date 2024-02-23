@@ -95,29 +95,29 @@ function generateStoryboard(gpt_results, show_storyboard) {
         all_subcolumns_html += subcolumn_html_new;
 
         var reference = gpt_results["reference"][i];
-        var reference_content = reference["content"];
+        var reference_content = reference["content"] == undefined || reference["content"] == "" ? "" : reference["content"];
         var reference_html_new = reference_html.replaceAll("##content##", reference_content);
         reference_html_new = reference_html_new.replaceAll("##src_img##", IMG_ENDPOINT + reference_content);
         all_reference_html += reference_html_new;
 
         var visual = gpt_results["visual"][i];
-        var visual_content = visual["content"];
+        var visual_content = visual["content"] == undefined || visual["content"] == "" ? "" : visual["content"];
         var visual_html_new = visual_html.replaceAll("##content##", visual_content);
         all_visual_html += visual_html_new;
 
         var audio = gpt_results["audio"][i];
-        var audio_content = audio["content"];
+        var audio_content = audio["content"] == undefined || audio["content"] == "" ? "" : audio["content"];
         var audio_html_new = audio_html.replaceAll("##content##", audio_content);
         all_audio_html += audio_html_new;
         all_audio_text += audio_content + "<br><br>";
 
         var copy = gpt_results["copy"][i];
-        var copy_content = copy["content"];
+        var copy_content = copy["content"] == undefined || copy["content"] == "" ? "" : copy["content"];
         var copy_html_new = copy_html.replaceAll("##content##", copy_content);
         all_copy_html += copy_html_new;
 
         var comments = gpt_results["comments"][i];
-        var comments_content = comments["content"];
+        var comments_content = comments["content"] == undefined || comments["content"] == "" ? "" : comments["content"];
         var comments_html_new = comments_html.replaceAll("##content##", comments_content);
         all_comments_html += comments_html_new;
     }
