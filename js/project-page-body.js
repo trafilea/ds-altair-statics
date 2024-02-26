@@ -25,6 +25,13 @@ Webflow.push(function () {
             let benchmark_link = "<a href='" + link + "' target='_blank'>[Link]</a><br><br>"
             $("#txtBenchmarkComparison").html(benchmark_link + (benchmark_text).replaceAll("%%", "<br><br>"));
             // $("#txtBenchmarkComparison").html((benchmark_obj["hook"] + benchmark_obj["lead_structure"] + benchmark_obj["closing_cta"]).replaceAll("%%", "<br><br>").replaceAll("%%", "<br><br>"));
+
+            // Adding logic to enable/disable buttons after changing the benchmark selection
+            let able_to_regenerate = false;
+            let able_to_generate = true;
+            let able_to_save_draft = false;
+            let able_to_generate_storyboard = false;
+            calculateButtons(able_to_regenerate, able_to_save_draft, able_to_generate, able_to_generate_storyboard)
         });
     });
 
