@@ -33,6 +33,16 @@ Webflow.push(function () {
     var ad_id = url.searchParams.get("ad_id");
     getBenchmarks(ad_id);
 
+    if (ad_id == "2") {
+        $('#txtAssetType').html("Short Ad");
+    }
+    if (ad_id == "3") {
+        $('#txtAssetType').html("Landing Page");
+    }
+    if (ad_id == "1") {
+        $('#txtAssetType').html("Lead Ad");
+    }
+
     var project_id = url.searchParams.get("project_id");
     var angle_id = url.searchParams.get("angle_id");
 
