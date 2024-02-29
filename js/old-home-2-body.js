@@ -1,5 +1,21 @@
 var Webflow = Webflow || [];
 Webflow.push(function () {
+    var current_url = new URL(window.location.href);
+    var preselected_asset_type = current_url.searchParams.get("asset_type");
+    
+    if (preselected_asset_type) {
+        $('#divAssetSelector').hide();
+
+        if (preselected_asset_type == "landing") {
+            $('#radLanding').prop('checked', true);
+        }
+        if (preselected_asset_type == "lead_ad") {
+            $('#radLeadAd').prop('checked', true);
+        }
+        if (preselected_asset_type == "short_ad") {
+            $('#radShortAd').prop('checked', true);
+        }
+    }
 
 function getBrands() {
     const formMethod = "GET";
