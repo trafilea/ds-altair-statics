@@ -1,5 +1,24 @@
 var Webflow = Webflow || [];
 Webflow.push(function () {
+    var current_url = new URL(window.location.href);
+    var preselected_asset_type = current_url.searchParams.get("asset_type");
+    
+    if (preselected_asset_type) {
+        $('#divAssetSelector').hide();
+
+        if (preselected_asset_type == "landing") {
+            $('#radLanding').prop('checked', true);
+            $('#txtDescribeYourAngle').html("Describe your angle for the Landing Page");
+        }
+        if (preselected_asset_type == "lead_ad") {
+            $('#radLeadAd').prop('checked', true);
+            $('#txtDescribeYourAngle').html("Describe your angle for the Lead Ad");
+        }
+        if (preselected_asset_type == "short_ad") {
+            $('#radShortAd').prop('checked', true);
+            $('#txtDescribeYourAngle').html("Describe your angle for the Short Ad");
+        }
+    }
 
 function getBrands() {
     const formMethod = "GET";
