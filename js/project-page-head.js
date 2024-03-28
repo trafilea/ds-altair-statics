@@ -63,7 +63,8 @@ function generateStoryboard(gpt_results, show_storyboard) {
     column_html = '<div class="price-table_cell cc-callout cc-header subhero" style="width: ##width##;"><div class="u-text-semibold subhero">##content##</div></div>'
     subcolumn_html = '<div class="price-table_cell cc-header"><div class="u-text-semibold">##content##</div></div>'
     reference_html = '<div class="price-table_cell cc-callout"><img src="##src_img##" alt=""></div>'
-    visual_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
+    visual_html = '<div class="price-table_cell cc-callout"><img src="##src_img##" alt=""></div>'
+    // visual_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
     audio_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
     copy_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
     comments_html = '<div class="price-table_cell cc-callout"><div class="text-block-3">##content##<br></div></div>'
@@ -103,6 +104,7 @@ function generateStoryboard(gpt_results, show_storyboard) {
         var visual = gpt_results["visual"][i];
         var visual_content = visual["content"] == undefined || visual["content"] == "" ? "" : visual["content"];
         var visual_html_new = visual_html.replaceAll("##content##", visual_content);
+        visual_html_new = visual_html_new.replaceAll("##src_img##", IMG_ENDPOINT + visual_content);
         all_visual_html += visual_html_new;
 
         var audio = gpt_results["audio"][i];
