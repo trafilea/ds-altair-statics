@@ -255,6 +255,7 @@ $('body').on('click', '.draft-item', function () {
                 angle: angle,
                 script_only: false,
                 previous_request_id: localStorage.getItem('request_id'),
+                storyboard_img: true,
             }),
             beforeSend: function () {
                 showOverlay();
